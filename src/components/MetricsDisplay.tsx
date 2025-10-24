@@ -114,11 +114,11 @@ export const MetricsDisplay = ({ otoc, entropy }: MetricsDisplayProps) => {
   }, [entropy]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <Card className="glass-panel p-4 space-y-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+      <Card className="glass-panel p-3 md:p-4 space-y-2">
         <div className="flex justify-between items-center">
-          <h3 className="text-sm font-semibold text-primary">OTOC (Scrambling)</h3>
-          <span className="text-lg font-mono text-primary quantum-text-glow">
+          <h3 className="text-xs md:text-sm font-semibold text-primary">OTOC</h3>
+          <span className="text-sm md:text-lg font-mono text-primary quantum-text-glow">
             {otoc.toFixed(4)}
           </span>
         </div>
@@ -128,15 +128,15 @@ export const MetricsDisplay = ({ otoc, entropy }: MetricsDisplayProps) => {
           height={100}
           className="w-full rounded border border-primary/20"
         />
-        <p className="text-xs text-muted-foreground">
-          Out-of-Time-Order Correlator measures quantum information scrambling
+        <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed">
+          Information scrambling measure
         </p>
       </Card>
 
-      <Card className="glass-panel p-4 space-y-2">
+      <Card className="glass-panel p-3 md:p-4 space-y-2">
         <div className="flex justify-between items-center">
-          <h3 className="text-sm font-semibold text-secondary">Entanglement Entropy</h3>
-          <span className="text-lg font-mono text-secondary" style={{ textShadow: "0 0 20px hsl(280 70% 60% / 0.5)" }}>
+          <h3 className="text-xs md:text-sm font-semibold text-secondary">Entropy</h3>
+          <span className="text-sm md:text-lg font-mono text-secondary" style={{ textShadow: "0 0 20px hsl(280 70% 60% / 0.5)" }}>
             {entropy.toFixed(4)}
           </span>
         </div>
@@ -146,8 +146,8 @@ export const MetricsDisplay = ({ otoc, entropy }: MetricsDisplayProps) => {
           height={100}
           className="w-full rounded border border-secondary/20"
         />
-        <p className="text-xs text-muted-foreground">
-          Von Neumann entropy quantifies quantum entanglement
+        <p className="text-[10px] md:text-xs text-muted-foreground leading-relaxed">
+          Quantum entanglement
         </p>
       </Card>
     </div>

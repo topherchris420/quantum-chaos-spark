@@ -213,12 +213,14 @@ export const QuantumCanvas = ({
   }, [states]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={800}
-      height={600}
-      className="w-full h-full rounded-lg border border-primary/30"
-      style={{ background: "radial-gradient(circle at center, rgba(0, 255, 255, 0.03), transparent 70%)" }}
-    />
+    <div className="w-full h-full min-h-[300px] md:min-h-[500px] relative">
+      <canvas
+        ref={canvasRef}
+        width={800}
+        height={600}
+        className="w-full h-full rounded-lg border border-primary/30 touch-none"
+        style={{ background: "radial-gradient(circle at center, rgba(0, 255, 255, 0.03), transparent 70%)" }}
+      />
+    </div>
   );
 };
