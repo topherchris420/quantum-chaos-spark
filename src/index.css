@@ -8,50 +8,49 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 240 20% 6%;
-    --foreground: 180 100% 90%;
+    --background: 220 25% 8%;
+    --foreground: 200 15% 85%;
 
-    --card: 240 15% 10%;
-    --card-foreground: 180 100% 90%;
+    --card: 220 20% 12%;
+    --card-foreground: 200 15% 85%;
 
-    --popover: 240 15% 10%;
-    --popover-foreground: 180 100% 90%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 200 15% 85%;
 
-    --primary: 180 100% 50%;
-    --primary-foreground: 240 20% 6%;
+    --primary: 195 85% 55%;
+    --primary-foreground: 220 25% 8%;
 
-    --secondary: 280 70% 60%;
-    --secondary-foreground: 240 20% 6%;
+    --secondary: 260 50% 50%;
+    --secondary-foreground: 220 25% 8%;
 
-    --muted: 240 10% 20%;
-    --muted-foreground: 180 50% 60%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 200 10% 55%;
 
-    --accent: 320 100% 60%;
-    --accent-foreground: 240 20% 6%;
+    --accent: 280 60% 55%;
+    --accent-foreground: 220 25% 8%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 70% 55%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 240 15% 20%;
-    --input: 240 15% 15%;
-    --ring: 180 100% 50%;
+    --border: 220 15% 22%;
+    --input: 220 18% 16%;
+    --ring: 195 85% 55%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Quantum theme colors */
-    --quantum-glow: 180 100% 50%;
-    --quantum-purple: 280 70% 60%;
-    --quantum-pink: 320 100% 60%;
-    --quantum-blue: 220 90% 55%;
+    /* Minimal sci-fi theme - neural network inspired */
+    --neural-cyan: 195 85% 55%;
+    --neural-purple: 260 50% 50%;
+    --neural-pink: 310 60% 55%;
+    --neural-blue: 220 70% 50%;
     
-    /* Gradients */
-    --gradient-quantum: linear-gradient(135deg, hsl(240 20% 8%), hsl(260 40% 12%), hsl(240 20% 8%));
-    --gradient-glow: radial-gradient(circle at center, hsl(180 100% 50% / 0.15), transparent 70%);
+    /* Subtle gradients for ambient feel */
+    --gradient-neural: linear-gradient(135deg, hsl(220 25% 8%), hsl(230 25% 10%), hsl(220 25% 8%));
+    --gradient-subtle: radial-gradient(circle at center, hsl(195 85% 55% / 0.05), transparent 60%);
     
-    /* Shadows */
-    --shadow-quantum: 0 0 30px hsl(180 100% 50% / 0.3), 0 0 60px hsl(180 100% 50% / 0.15);
-    --shadow-purple: 0 0 30px hsl(280 70% 60% / 0.3);
-    --shadow-pink: 0 0 30px hsl(320 100% 60% / 0.3);
+    /* Minimal shadows - flat design */
+    --shadow-subtle: 0 2px 8px hsl(195 85% 55% / 0.1);
+    --shadow-glow: 0 0 20px hsl(195 85% 55% / 0.15);
   }
 }
 
@@ -62,31 +61,36 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    background: linear-gradient(135deg, hsl(240 20% 6%), hsl(260 30% 8%), hsl(240 20% 6%));
+    background: linear-gradient(135deg, hsl(220 25% 8%), hsl(230 25% 10%), hsl(220 25% 8%));
     background-attachment: fixed;
   }
 }
 
 @layer utilities {
   .quantum-glow {
-    box-shadow: 0 0 30px hsl(var(--quantum-glow) / 0.3), 0 0 60px hsl(var(--quantum-glow) / 0.15);
+    box-shadow: 0 0 15px hsl(var(--neural-cyan) / 0.2);
   }
   
   .quantum-text-glow {
-    text-shadow: 0 0 20px hsl(var(--quantum-glow) / 0.5);
+    text-shadow: 0 0 10px hsl(var(--neural-cyan) / 0.3);
   }
   
   .glass-panel {
-    background: hsl(var(--card) / 0.5);
-    backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--border) / 0.3);
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.4);
   }
   
   .gradient-text {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
+    background: linear-gradient(120deg, hsl(var(--primary)), hsl(var(--secondary)));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+  
+  .neural-node {
+    background: hsl(var(--primary) / 0.1);
+    border: 1px solid hsl(var(--primary) / 0.3);
   }
 }
 

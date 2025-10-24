@@ -1,5 +1,6 @@
-import { ExternalLink, Github, Info } from "lucide-react";
+import { ExternalLink, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 interface HeaderProps {
   onShowReadme: () => void;
@@ -10,7 +11,11 @@ export const Header = ({ onShowReadme }: HeaderProps) => {
     <header className="w-full border-b border-primary/20 glass-panel">
       <div className="max-w-7xl mx-auto px-4 py-3 md:py-4 flex items-center justify-between">
         <div className="flex items-center gap-2 md:gap-3">
-          <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-primary via-secondary to-accent animate-pulse-glow" />
+          <img 
+            src={logo} 
+            alt="Vers3Dynamics" 
+            className="w-8 h-8 md:w-10 md:h-10 rounded-lg object-cover opacity-90 hover:opacity-100 transition-opacity" 
+          />
           <div>
             <h1 className="text-sm md:text-lg font-bold gradient-text">
               Quantum Scrambling
@@ -42,7 +47,7 @@ export const Header = ({ onShowReadme }: HeaderProps) => {
               className="flex items-center gap-1 md:gap-2"
             >
               <ExternalLink className="h-3 w-3 md:h-4 md:w-4" />
-              <span className="hidden sm:inline">Vers3 Dynamics</span>
+              <span className="hidden sm:inline">Vers3Dynamics</span>
             </a>
           </Button>
         </div>

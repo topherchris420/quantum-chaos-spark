@@ -145,13 +145,13 @@ export const QuantumCanvas = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Clear canvas
-    ctx.fillStyle = "rgba(15, 15, 25, 0.2)";
+    // Clear canvas with subtle fade for trails
+    ctx.fillStyle = "rgba(18, 22, 28, 0.15)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw connections
-    ctx.strokeStyle = "rgba(0, 255, 255, 0.1)";
-    ctx.lineWidth = 2;
+    // Draw connections - minimal, thin lines
+    ctx.strokeStyle = "rgba(73, 188, 220, 0.15)";
+    ctx.lineWidth = 1;
     for (let i = 0; i < states.length; i++) {
       const next = (i + 1) % states.length;
       ctx.beginPath();
@@ -160,43 +160,43 @@ export const QuantumCanvas = ({
       ctx.stroke();
     }
 
-    // Draw quantum sites
+    // Draw quantum sites - minimal 2D style
     states.forEach((state, i) => {
       const amplitude = Math.sqrt(state.realPart ** 2 + state.imagPart ** 2);
       const phase = Math.atan2(state.imagPart, state.realPart);
       
-      // Color based on phase
-      const hue = ((phase + Math.PI) / (2 * Math.PI)) * 360;
-      const color = `hsl(${hue}, 100%, 60%)`;
+      // Color based on phase - neural network palette
+      const hue = 180 + ((phase + Math.PI) / (2 * Math.PI)) * 120; // Range from cyan to purple
+      const color = `hsl(${hue}, 70%, 55%)`;
       
-      // Glow effect
+      // Subtle flat glow
       const gradient = ctx.createRadialGradient(
         state.position.x, state.position.y, 0,
-        state.position.x, state.position.y, 30 * amplitude
+        state.position.x, state.position.y, 20 * amplitude
       );
       gradient.addColorStop(0, color);
-      gradient.addColorStop(0.5, `hsla(${hue}, 100%, 60%, 0.3)`);
+      gradient.addColorStop(0.6, `hsla(${hue}, 70%, 55%, 0.2)`);
       gradient.addColorStop(1, "transparent");
       
       ctx.fillStyle = gradient;
       ctx.beginPath();
-      ctx.arc(state.position.x, state.position.y, 30 * amplitude, 0, Math.PI * 2);
+      ctx.arc(state.position.x, state.position.y, 20 * amplitude, 0, Math.PI * 2);
       ctx.fill();
 
-      // Core
+      // Flat core - 2D aesthetic
       ctx.fillStyle = color;
       ctx.beginPath();
-      ctx.arc(state.position.x, state.position.y, 8 * amplitude, 0, Math.PI * 2);
+      ctx.arc(state.position.x, state.position.y, 6 * amplitude, 0, Math.PI * 2);
       ctx.fill();
 
       // Site label
-      ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
-      ctx.font = "12px monospace";
+      ctx.fillStyle = "rgba(200, 210, 220, 0.5)";
+      ctx.font = "11px 'Courier New', monospace";
       ctx.textAlign = "center";
-      ctx.fillText(i.toString(), state.position.x, state.position.y - 25);
+      ctx.fillText(i.toString(), state.position.x, state.position.y - 20);
     });
 
-    // Draw information flow particles
+    // Draw information flow particles - minimal style
     if (timeRef.current % 0.5 < 0.05) {
       for (let i = 0; i < states.length; i++) {
         const next = (i + 1) % states.length;
@@ -204,9 +204,9 @@ export const QuantumCanvas = ({
         const x = states[i].position.x * (1 - t) + states[next].position.x * t;
         const y = states[i].position.y * (1 - t) + states[next].position.y * t;
         
-        ctx.fillStyle = "rgba(0, 255, 255, 0.8)";
+        ctx.fillStyle = "rgba(73, 188, 220, 0.6)";
         ctx.beginPath();
-        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.arc(x, y, 2, 0, Math.PI * 2);
         ctx.fill();
       }
     }
@@ -218,8 +218,8 @@ export const QuantumCanvas = ({
         ref={canvasRef}
         width={800}
         height={600}
-        className="w-full h-full rounded-lg border border-primary/30 touch-none"
-        style={{ background: "radial-gradient(circle at center, rgba(0, 255, 255, 0.03), transparent 70%)" }}
+        className="w-full h-full rounded-lg border border-primary/20 touch-none"
+        style={{ background: "radial-gradient(circle at center, rgba(73, 188, 220, 0.03), transparent 70%)" }}
       />
     </div>
   );
