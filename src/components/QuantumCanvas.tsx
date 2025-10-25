@@ -27,6 +27,7 @@ export const QuantumCanvas = ({
   const [states, setStates] = useState<QuantumState[]>([]);
   const timeRef = useRef(0);
   const animationRef = useRef<number>();
+  const particlesRef = useRef<Array<{ x: number; y: number; vx: number; vy: number; life: number }>>([]);
 
   // Initialize quantum states
   useEffect(() => {
@@ -196,20 +197,36 @@ export const QuantumCanvas = ({
       ctx.fillText(i.toString(), state.position.x, state.position.y - 20);
     });
 
-    // Draw information flow particles - minimal style
-    if (timeRef.current % 0.5 < 0.05) {
-      for (let i = 0; i < states.length; i++) {
-        const next = (i + 1) % states.length;
-        const t = Math.random();
-        const x = states[i].position.x * (1 - t) + states[next].position.x * t;
-        const y = states[i].position.y * (1 - t) + states[next].position.y * t;
-        
-        ctx.fillStyle = "rgba(73, 188, 220, 0.6)";
-        ctx.beginPath();
-        ctx.arc(x, y, 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
+    // Add new particles periodically
+    if (Math.random() < 0.1) {
+      states.forEach((state, i) => {
+        const next = states[(i + 1) % states.length];
+        const angle = Math.atan2(next.position.y - state.position.y, next.position.x - state.position.x);
+        particlesRef.current.push({
+          x: state.position.x,
+          y: state.position.y,
+          vx: Math.cos(angle) * 2,
+          vy: Math.sin(angle) * 2,
+          life: 1.0
+        });
+      });
     }
+
+    // Update and draw particles
+    particlesRef.current = particlesRef.current.filter(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= 0.02;
+      
+      if (p.life > 0) {
+        ctx.fillStyle = `rgba(73, 188, 220, ${p.life * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+        return true;
+      }
+      return false;
+    });
   }, [states]);
 
   return (

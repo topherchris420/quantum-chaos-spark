@@ -5,8 +5,10 @@ import { MetricsDisplay } from "@/components/MetricsDisplay";
 import { Header } from "@/components/Header";
 import { ReadmeDialog } from "@/components/ReadmeDialog";
 import { Card } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
+  const { toast } = useToast();
   const [numSites, setNumSites] = useState(8);
   const [coupling, setCoupling] = useState(0.5);
   const [gainLoss, setGainLoss] = useState(0.2);
@@ -19,7 +21,20 @@ const Index = () => {
     setIsRunning(false);
     setOtoc(0);
     setEntropy(0);
-    setNumSites(prev => prev);
+    toast({
+      title: "System Reset",
+      description: "Quantum state reinitialized",
+      duration: 2000,
+    });
+  };
+
+  const handleToggleRunning = () => {
+    setIsRunning(!isRunning);
+    toast({
+      title: isRunning ? "Simulation Paused" : "Simulation Running",
+      description: isRunning ? "Evolution halted" : "Quantum dynamics active",
+      duration: 2000,
+    });
   };
 
   return (
@@ -65,7 +80,7 @@ const Index = () => {
                 onNumSitesChange={setNumSites}
                 onCouplingChange={setCoupling}
                 onGainLossChange={setGainLoss}
-                onToggleRunning={() => setIsRunning(!isRunning)}
+                onToggleRunning={handleToggleRunning}
                 onReset={handleReset}
               />
             </div>

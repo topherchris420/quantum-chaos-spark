@@ -68,7 +68,17 @@ All colors MUST be HSL.
 
 @layer utilities {
   .quantum-glow {
-    box-shadow: 0 0 15px hsl(var(--neural-cyan) / 0.2);
+    box-shadow: 0 0 20px hsl(var(--neural-cyan) / 0.15);
+    animation: quantum-pulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes quantum-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--neural-cyan) / 0.15);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(var(--neural-cyan) / 0.25);
+    }
   }
   
   .quantum-text-glow {

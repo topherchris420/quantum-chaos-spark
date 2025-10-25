@@ -2,6 +2,7 @@ import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Play, Pause, RotateCcw } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface ControlPanelProps {
   numSites: number;
@@ -26,6 +27,25 @@ export const ControlPanel = ({
   onToggleRunning,
   onReset,
 }: ControlPanelProps) => {
+  const { toast } = useToast();
+
+  const handleNumSitesChange = (value: number) => {
+    onNumSitesChange(value);
+    toast({
+      title: "Sites Updated",
+      description: `Quantum lattice reconfigured to ${value} sites`,
+      duration: 2000,
+    });
+  };
+
+  const handleCouplingChange = (value: number) => {
+    onCouplingChange(value);
+  };
+
+  const handleGainLossChange = (value: number) => {
+    onGainLossChange(value);
+  };
+
   return (
     <Card className="glass-panel p-4 md:p-6 space-y-4 md:space-y-6">
       <div className="flex items-center justify-between">
@@ -60,7 +80,7 @@ export const ControlPanel = ({
           </div>
           <Slider
             value={[numSites]}
-            onValueChange={([value]) => onNumSitesChange(value)}
+            onValueChange={([value]) => handleNumSitesChange(value)}
             min={4}
             max={16}
             step={1}
@@ -77,7 +97,7 @@ export const ControlPanel = ({
           </div>
           <Slider
             value={[coupling]}
-            onValueChange={([value]) => onCouplingChange(value)}
+            onValueChange={([value]) => handleCouplingChange(value)}
             min={0}
             max={2}
             step={0.1}
@@ -94,7 +114,7 @@ export const ControlPanel = ({
           </div>
           <Slider
             value={[gainLoss]}
-            onValueChange={([value]) => onGainLossChange(value)}
+            onValueChange={([value]) => handleGainLossChange(value)}
             min={0}
             max={1}
             step={0.05}
