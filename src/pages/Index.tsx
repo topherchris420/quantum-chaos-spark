@@ -4,6 +4,7 @@ import { ControlPanel } from "@/components/ControlPanel";
 import { MetricsDisplay } from "@/components/MetricsDisplay";
 import { Header } from "@/components/Header";
 import { ReadmeDialog } from "@/components/ReadmeDialog";
+import { ParticleBackground } from "@/components/ParticleBackground";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 
@@ -38,9 +39,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header onShowReadme={() => setShowReadme(true)} />
-      <ReadmeDialog open={showReadme} onOpenChange={setShowReadme} />
+    <div className="min-h-screen flex flex-col relative">
+      <ParticleBackground />
+      <div className="relative z-10">
+        <Header onShowReadme={() => setShowReadme(true)} />
+        <ReadmeDialog open={showReadme} onOpenChange={setShowReadme} />
       
       <main className="flex-1 p-3 md:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto space-y-4 md:space-y-6">
@@ -122,6 +125,7 @@ const Index = () => {
           </Card>
         </div>
       </main>
+      </div>
     </div>
   );
 };
