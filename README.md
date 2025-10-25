@@ -90,7 +90,7 @@ MIT License - feel free to use this project for learning and experimentation.
 
 ## 🙏 Credits
 
-Developed with [Lovable](https://lovable.dev) - AI-powered web development platform.
+Developed with [Vers3Dynamics](https://vers3dynamics.com) 
 
 ---
 
